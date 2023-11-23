@@ -63,36 +63,6 @@
         </nav>
     </div>
 
-    <section>
-        <div id="items">
-         <nav uk-dropnav="align: center">
-             <ul class="uk-subnav uk-flex-center">
-                 <li>
-                     <a href="{% url 'face' %}">Face <span uk-drop-parent-icon></span></a>
-                     <div class="uk-dropdown">
-                         <ul class="uk-nav uk-dropdown-nav">
-                             <li class="uk-active"><a href="#">Active</a></li>
-                             <li><a href="#">Item</a></li>
-                             <li><a href="#">Item</a></li>
-                         </ul>
-                     </div>
-                 </li>
-                 <li>
-                     <a href="{% url 'lip' %}">Lip <span uk-drop-parent-icon></span></a>
-                     <div class="uk-dropdown">
-                         <ul class="uk-nav uk-dropdown-nav">
-                             <li class="uk-active"><a href="#">Active</a></li>
-                             <li><a href="#">Item</a></li>
-                             <li><a href="#">Item</a></li>
-                         </ul>
-                     </div>
-                 </li>
-                 <li><a href="{% url 'eye' %}">Eye</a></li>
-             </ul>
-         </nav>
-        </div>
-     </section>
-
 
     <div class="container">
         {% block content %}
