@@ -3,6 +3,11 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/showcase.css' %}">
 
+{% block category %}
+    {% include "store/category.html" %}
+{% endblock %}
+
+
 <h3>Face</h3>
 
 <div class="row">
