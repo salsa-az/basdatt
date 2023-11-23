@@ -1,0 +1,196 @@
+{% extends "store/main.html" %}
+{% load static %}
+{% block content %}
+<h3>Store</h3>
+
+
+ 
+ <section>
+     <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1" uk-slider="center: true">
+
+         <ul class="uk-slider-items uk-grid uk-grid-match" uk-height-viewport="offset-top: true; offset-bottom: 30">
+             <li class="uk-width-3-4">
+                 <div class=uk-cover-container">
+                     <img src="{% static 'images/LANDING PAGE/1.png' %}" width="600" height="900" alt="">
+                     <div class="uk-position-center uk-panel"></div>
+                 </div>
+             </li>
+             <li class="uk-width-3-4">
+                 <div class=uk-cover-container">
+                     <img src="{% static 'images/LANDING PAGE/2.png' %}" width="600" height="900" alt="">
+                     <div class="uk-position-center uk-panel"></div>
+                 </div>
+             </li>
+             <li class="uk-width-3-4">
+                 <div class=uk-cover-container">
+                     <img src="{% static 'images/LANDING PAGE/3.png' %}" width="600" height="900" alt="">
+                     <div class="uk-position-center uk-panel"></div>
+                 </div>
+             </li>
+             <li class="uk-width-3-4">
+                 <div class=uk-cover-container">
+                     <img src="{% static 'images/LANDING PAGE/4.png' %}" width="600" height="900" alt="">
+                     <div class="uk-position-center uk-panel"></div>
+                 </div>
+             </li>
+             <li class="uk-width-3-4">
+                 <div class=uk-cover-container">
+                     <img src="{% static 'images/LANDING PAGE/5.png' %}" width="600" height="900" alt="">
+                     <div class="uk-position-center uk-panel"></div>
+                 </div>
+             </li>
+             <li class="uk-width-3-4">
+                 <div class=uk-cover-container">
+                     <img src="{% static 'images/LANDING PAGE/6.png' %}" width="600" height="900" alt="">
+                     <div class="uk-position-center uk-panel"></div>
+                 </div>
+             </li>
+             <li class="uk-width-3-4">
+                 <div class=uk-cover-container">
+                     <img src="{% static 'images/LANDING PAGE/7.png' %}" width="600" height="900" alt="">
+                     <div class="uk-position-center uk-panel"></div>
+                 </div>
+             </li>
+             <li class="uk-width-3-4">
+                 <div class=uk-cover-container">
+                     <img src="{% static 'images/LANDING PAGE/8.png' %}" width="600" height="900" alt="">
+                     <div class="uk-position-center uk-panel"></div>
+                 </div>
+             </li>
+         </ul>
+     
+         <a class="uk-position-center-left uk-position-small uk-hidden-hover" href uk-slidenav-previous uk-slider-item="previous"></a>
+         <a class="uk-position-center-right uk-position-small uk-hidden-hover" href uk-slidenav-next uk-slider-item="next"></a>
+     
+     </div>
+ </section>
+ <br>
+ <br>
+ <br>
+ <br>
+ <section class="container">
+     <div>
+         <h1>New This Week</h1>
+     </div>
+     <div class="uk-column-1-3">
+         <section class="img1">
+             <img src="{% static 'images/LANDING PAGE/9.png' %}" alt="">
+             <h5 class="name">DIOR Glow Face Palette • 10g</h5>
+             <p class="prod-description">A face palette that illuminates for instant radiance and a natural glow.</p>
+             <p class="price">Rp650.000,00</p>
+             <!-- <p uk-margin>
+                 <a class="uk-button uk-button-default" href="#">Link</a>
+             </p> -->
+         </section>
+         <section class="img2">
+             <img src="{% static 'images/LANDING PAGE/10.png' %}" alt="">
+             <h5 class="name">MAC Eye Shaow • 1.5g</h5>
+             <p class="prod-description">A highly pigmented eyeshadow powder available in a wide variety.</p>
+             <p>Rp250.000,00</p>
+         </section>
+         <section class="img3">
+             <img src="{% static 'images/LANDING PAGE/11.png' %}" alt="">
+             <h5 class="name">ANASTASIA BEVERLY HILLS Lip Primer</h5>
+             <p class="prod-description">Prime and smooth lips to prepare them for colour with this sheer.</p>
+             <p class="price">Rp245.000,00</p>
+         </section>
+     </div>
+ </section>
+ <br>
+ <br>
+ <br>
+ <br>
+ <!-- LINK:
+
+- Ariana : https://www.youtube.com/watch?v=MdLcP8dJls4
+- Kylie : https://www.youtube.com/watch?v=bEKufM_im88
+- Olivia : https://www.youtube.com/watch?v=CXvG2CBJ3SE
+- Hailee : https://youtube.com/watch?v=k-aZ6W4mRds
+- Lily : https://www.youtube.com/watch?v=zpDuNzO_rwA
+- Kendall : https://www.youtube.com/watch?v=UZiIC3V6JQY -->
+ <br>
+ <section class="container">
+     <div>
+         <h1>Discover Your Beauty Tips</h1>
+         <h2>in collaboration with Vogue</h2>
+     </div>
+     <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="clsActivated: uk-transition-active; center: true">
+
+         <ul class="uk-slider-items uk-grid">
+             <li class="uk-width-3-4">
+                 <div class="uk-panel">
+                     <a href="https://www.youtube.com/watch?v=MdLcP8dJls4">
+                         <img src="{% static 'images/LANDING PAGE/1 (1).png' %}" width="1800" height="1200" alt="">
+                     </a>
+                     <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                         <h3 class="uk-margin-remove">Ariana Grande</h3>
+                         <p class="uk-margin-remove">Skin Care Routine & Guide to a '60s Cat Eye</p>
+                     </div>
+                 </div>
+             </li>
+             <li class="uk-width-3-4">
+                 <div class="uk-panel">
+                     <a href="https://www.youtube.com/watch?v=bEKufM_im88">
+                         <img src="{% static 'images/LANDING PAGE/2 (1).png' %}" width="1800" height="1200" alt="">
+                     </a>
+                     <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                         <h3 class="uk-margin-remove">Kylie Jenner</h3>
+                         <p class="uk-margin-remove">New CLassic Beauty Routine</p>
+                     </div>
+                 </div>
+             </li>
+             <li class="uk-width-3-4">
+                 <div class="uk-panel">
+                     <a href="https://www.youtube.com/watch?v=CXvG2CBJ3SE">
+                         <img src="{% static 'images/LANDING PAGE/3 (1).png' %}" width="1800" height="1200" alt="">
+                     </a>
+                     <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                         <h3 class="uk-margin-remove">Olivia Rodrigo</h3>
+                         <p class="uk-margin-remove">Guide to Effortless Skin-Care and Makeup</p>
+                     </div>
+                 </div>
+             </li>
+             <li class="uk-width-3-4">
+                 <div class="uk-panel">
+                     <a href="https://youtube.com/watch?v=k-aZ6W4mRds">
+                         <img src="{% static 'images/LANDING PAGE/4 (1).png' %}" width="1800" height="1200" alt="">
+                     </a>
+                     <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                         <h3 class="uk-margin-remove">Hailee Steinfeld</h3>
+                         <p class="uk-margin-remove">Guide to Glowing Skin ad Easy Everyday Makeup</p>
+                     </div>
+                 </div>
+             </li>
+             <li class="uk-width-3-4">
+                 <div class="uk-panel">
+                     <a href="https://www.youtube.com/watch?v=zpDuNzO_rwA">
+                         <img src="{% static 'images/LANDING PAGE/5 (1).png' %}" width="1800" height="1200" alt="">
+                     </a>
+                     <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                         <h3 class="uk-margin-remove">Lily Collins</h3>
+                         <p class="uk-margin-remove">Day-to-Night French Girl Look</p>
+                     </div>
+                 </div>
+             </li>
+             <li class="uk-width-3-4">
+                 <div class="uk-panel">
+                     <a href="https://www.youtube.com/watch?v=UZiIC3V6JQY">
+                         <img src="{% static 'images/LANDING PAGE/6 (1).png' %}" width="1800" height="1200" alt="">
+                     </a>
+                     <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center uk-transition-slide-bottom">
+                         <h3 class="uk-margin-remove">Kendall Jenner</h3>
+                         <p class="uk-margin-remove">Guide to Sun-Kissed Makeup</p>
+                     </div>
+                 </div>
+             </li>
+         </ul>
+     
+         <a class="uk-position-center-left uk-position-small uk-hidden-hover" href uk-slidenav-previous uk-slider-item="previous"></a>
+         <a class="uk-position-center-right uk-position-small uk-hidden-hover" href uk-slidenav-next uk-slider-item="next"></a>
+     
+     </div>
+ </section>
+ <footer>
+     <h2>© 2023 Viola all rights reserved</h2>
+ </footer>
+{% endblock content %}

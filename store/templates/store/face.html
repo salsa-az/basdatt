@@ -1,0 +1,48 @@
+{% extends "store/main.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/showcase.css' %}">
+
+<h3>Face</h3>
+
+<div class="row">
+    <div class="col-lg-4">
+        <img src="{% static 'images/face/FA1.png' %}" alt="" class="thumbnail">
+        <div class="box-element product">
+            <h6><strong>Product</strong></h6>
+            <hr>
+            <div class="price-box">
+                <p class="price" style="display: inline-block; float: right;">Rp 245.000,00</p>
+            </div>
+            <button class="add-cart-btn">add to cart</button>
+            <a class="btn btn-outline-success" href="#"></a>
+
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <img src="{% static 'images/face/FA1.png' %}" alt="" class="thumbnail">
+        <div class="box-element product">
+            <h6><strong>Product</strong></h6>
+            <hr>
+            <div class="price-box">
+                <p class="price" style="display: inline-block; float: right;">Rp 245.000,00</p>
+            </div>
+            <button class="add-cart-btn">add to cart</button>
+            <a class="btn btn-outline-success" href="#"></a>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <img src="{% static 'images/face/FA1.png' %}" alt="" class="thumbnail">
+        <div class="box-element product">
+            <h6><strong>Product</strong></h6>
+            <hr>
+            <div class="price-box">
+                <p class="price" style="display: inline-block; float: right;">Rp 245.000,00</p>
+            </div>
+            <button class="add-cart-btn">add to cart</button>
+            <a class="btn btn-outline-success" href="#"></a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

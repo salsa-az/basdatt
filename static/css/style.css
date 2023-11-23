@@ -1,0 +1,511 @@
+@import url('https://fonts.googleapis.com/css2?family=Young+Serif&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  font-family: 'Montserrat', sans-serif;
+}
+
+iframe {
+  display: flex;
+}
+
+
+.uk-navbar-container:not(.uk-navbar-transparent) {
+  background: #C1858D !important;
+  position: sticky !important;
+}
+
+.uk-navbar-nav>li>a {
+  color: white !important;
+  text-transform: uppercase;
+  transition: .1s ease-in-out;
+  transition-property: color, background-color;
+}
+
+.uk-navbar-nav ion-icon {
+  top: 50% !important;
+  bottom: 50% !important;
+  color: white !important;
+  text-transform: uppercase;
+  transition: .1s ease-in-out;
+  transition-property: color, background-color;
+  font-size: 30px !important;
+}
+
+
+.uk-navbar-center h2 {
+  padding: 10%;
+  font-size: 65px;
+}
+
+.uk-navbar-center .viola {
+  color: white;
+  text-decoration: none;
+  margin-top: 30px;
+  font-family: 'Seaweed Script', cursive;
+  font-size: 65px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+#items ul {
+  position: relative;
+  text-transform: uppercase;
+  padding: 2rem 0 2rem 0;
+  margin-bottom: 5rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.container h1 {
+  color: #222;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 36.575px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 53.76px;
+  /* 146.986% */
+}
+
+.container h2 {
+  color: #000;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 53.76px;
+  /* 179.2% */
+}
+
+.uk-column-1-3 {
+  justify-content: space-around;
+  display: flex;
+}
+
+.img1 {
+  text-align: center;
+}
+
+.img2 {
+  text-align: center;
+}
+
+.img3 {
+  text-align: center;
+}
+
+.uk-overlay-primary {
+  background: rgba(222, 215, 199, 0.5) !important;
+}
+
+.uk-card-primary.uk-card-body .uk-h1,
+.uk-card-primary.uk-card-body .uk-h2,
+.uk-card-primary.uk-card-body .uk-h3,
+.uk-card-primary.uk-card-body .uk-h4,
+.uk-card-primary.uk-card-body .uk-h5,
+.uk-card-primary.uk-card-body .uk-h6,
+.uk-card-primary.uk-card-body .uk-heading-2xlarge,
+.uk-card-primary.uk-card-body .uk-heading-large,
+.uk-card-primary.uk-card-body .uk-heading-medium,
+.uk-card-primary.uk-card-body .uk-heading-small,
+.uk-card-primary.uk-card-body .uk-heading-xlarge,
+.uk-card-primary.uk-card-body h1,
+.uk-card-primary.uk-card-body h2,
+.uk-card-primary.uk-card-body h3,
+.uk-card-primary.uk-card-body h4,
+.uk-card-primary.uk-card-body h5,
+.uk-card-primary.uk-card-body h6,
+.uk-card-primary>:not([class*=uk-card-media]) .uk-h1,
+.uk-card-primary>:not([class*=uk-card-media]) .uk-h2,
+.uk-card-primary>:not([class*=uk-card-media]) .uk-h3,
+.uk-card-primary>:not([class*=uk-card-media]) .uk-h4,
+.uk-card-primary>:not([class*=uk-card-media]) .uk-h5,
+.uk-card-primary>:not([class*=uk-card-media]) .uk-h6,
+.uk-card-primary>:not([class*=uk-card-media]) .uk-heading-2xlarge,
+.uk-card-primary>:not([class*=uk-card-media]) .uk-heading-large,
+.uk-card-primary>:not([class*=uk-card-media]) .uk-heading-medium,
+.uk-card-primary>:not([class*=uk-card-media]) .uk-heading-small,
+.uk-card-primary>:not([class*=uk-card-media]) .uk-heading-xlarge,
+.uk-card-primary>:not([class*=uk-card-media]) h1,
+.uk-card-primary>:not([class*=uk-card-media]) h2,
+.uk-card-primary>:not([class*=uk-card-media]) h3,
+.uk-card-primary>:not([class*=uk-card-media]) h4,
+.uk-card-primary>:not([class*=uk-card-media]) h5,
+.uk-card-primary>:not([class*=uk-card-media]) h6,
+.uk-card-secondary.uk-card-body .uk-h1,
+.uk-card-secondary.uk-card-body .uk-h2,
+.uk-card-secondary.uk-card-body .uk-h3,
+.uk-card-secondary.uk-card-body .uk-h4,
+.uk-card-secondary.uk-card-body .uk-h5,
+.uk-card-secondary.uk-card-body .uk-h6,
+.uk-card-secondary.uk-card-body .uk-heading-2xlarge,
+.uk-card-secondary.uk-card-body .uk-heading-large,
+.uk-card-secondary.uk-card-body .uk-heading-medium,
+.uk-card-secondary.uk-card-body .uk-heading-small,
+.uk-card-secondary.uk-card-body .uk-heading-xlarge,
+.uk-card-secondary.uk-card-body h1,
+.uk-card-secondary.uk-card-body h2,
+.uk-card-secondary.uk-card-body h3,
+.uk-card-secondary.uk-card-body h4,
+.uk-card-secondary.uk-card-body h5,
+.uk-card-secondary.uk-card-body h6,
+.uk-card-secondary>:not([class*=uk-card-media]) .uk-h1,
+.uk-card-secondary>:not([class*=uk-card-media]) .uk-h2,
+.uk-card-secondary>:not([class*=uk-card-media]) .uk-h3,
+.uk-card-secondary>:not([class*=uk-card-media]) .uk-h4,
+.uk-card-secondary>:not([class*=uk-card-media]) .uk-h5,
+.uk-card-secondary>:not([class*=uk-card-media]) .uk-h6,
+.uk-card-secondary>:not([class*=uk-card-media]) .uk-heading-2xlarge,
+.uk-card-secondary>:not([class*=uk-card-media]) .uk-heading-large,
+.uk-card-secondary>:not([class*=uk-card-media]) .uk-heading-medium,
+.uk-card-secondary>:not([class*=uk-card-media]) .uk-heading-small,
+.uk-card-secondary>:not([class*=uk-card-media]) .uk-heading-xlarge,
+.uk-card-secondary>:not([class*=uk-card-media]) h1,
+.uk-card-secondary>:not([class*=uk-card-media]) h2,
+.uk-card-secondary>:not([class*=uk-card-media]) h3,
+.uk-card-secondary>:not([class*=uk-card-media]) h4,
+.uk-card-secondary>:not([class*=uk-card-media]) h5,
+.uk-card-secondary>:not([class*=uk-card-media]) h6,
+.uk-light .uk-h1,
+.uk-light .uk-h2,
+.uk-light .uk-h3,
+.uk-light .uk-h4,
+.uk-light .uk-h5,
+.uk-light .uk-h6,
+.uk-light .uk-heading-2xlarge,
+.uk-light .uk-heading-large,
+.uk-light .uk-heading-medium,
+.uk-light .uk-heading-small,
+.uk-light .uk-heading-xlarge,
+.uk-light h1,
+.uk-light h2,
+.uk-light h3,
+.uk-light h4,
+.uk-light h5,
+.uk-light h6,
+.uk-offcanvas-bar .uk-h1,
+.uk-offcanvas-bar .uk-h2,
+.uk-offcanvas-bar .uk-h3,
+.uk-offcanvas-bar .uk-h4,
+.uk-offcanvas-bar .uk-h5,
+.uk-offcanvas-bar .uk-h6,
+.uk-offcanvas-bar .uk-heading-2xlarge,
+.uk-offcanvas-bar .uk-heading-large,
+.uk-offcanvas-bar .uk-heading-medium,
+.uk-offcanvas-bar .uk-heading-small,
+.uk-offcanvas-bar .uk-heading-xlarge,
+.uk-offcanvas-bar h1,
+.uk-offcanvas-bar h2,
+.uk-offcanvas-bar h3,
+.uk-offcanvas-bar h4,
+.uk-offcanvas-bar h5,
+.uk-offcanvas-bar h6,
+.uk-overlay-primary .uk-h1,
+.uk-overlay-primary .uk-h2,
+.uk-overlay-primary .uk-h3,
+.uk-overlay-primary .uk-h4,
+.uk-overlay-primary .uk-h5,
+.uk-overlay-primary .uk-h6,
+.uk-overlay-primary .uk-heading-2xlarge,
+.uk-overlay-primary .uk-heading-large,
+.uk-overlay-primary .uk-heading-medium,
+.uk-overlay-primary .uk-heading-small,
+.uk-overlay-primary .uk-heading-xlarge,
+.uk-overlay-primary h1,
+.uk-overlay-primary h2,
+.uk-overlay-primary h3,
+.uk-overlay-primary h4,
+.uk-overlay-primary h5,
+.uk-overlay-primary h6,
+.uk-section-primary:not(.uk-preserve-color) .uk-h1,
+.uk-section-primary:not(.uk-preserve-color) .uk-h2,
+.uk-section-primary:not(.uk-preserve-color) .uk-h3,
+.uk-section-primary:not(.uk-preserve-color) .uk-h4,
+.uk-section-primary:not(.uk-preserve-color) .uk-h5,
+.uk-section-primary:not(.uk-preserve-color) .uk-h6,
+.uk-section-primary:not(.uk-preserve-color) .uk-heading-2xlarge,
+.uk-section-primary:not(.uk-preserve-color) .uk-heading-large,
+.uk-section-primary:not(.uk-preserve-color) .uk-heading-medium,
+.uk-section-primary:not(.uk-preserve-color) .uk-heading-small,
+.uk-section-primary:not(.uk-preserve-color) .uk-heading-xlarge,
+.uk-section-primary:not(.uk-preserve-color) h1,
+.uk-section-primary:not(.uk-preserve-color) h2,
+.uk-section-primary:not(.uk-preserve-color) h3,
+.uk-section-primary:not(.uk-preserve-color) h4,
+.uk-section-primary:not(.uk-preserve-color) h5,
+.uk-section-primary:not(.uk-preserve-color) h6,
+.uk-section-secondary:not(.uk-preserve-color) .uk-h1,
+.uk-section-secondary:not(.uk-preserve-color) .uk-h2,
+.uk-section-secondary:not(.uk-preserve-color) .uk-h3,
+.uk-section-secondary:not(.uk-preserve-color) .uk-h4,
+.uk-section-secondary:not(.uk-preserve-color) .uk-h5,
+.uk-section-secondary:not(.uk-preserve-color) .uk-h6,
+.uk-section-secondary:not(.uk-preserve-color) .uk-heading-2xlarge,
+.uk-section-secondary:not(.uk-preserve-color) .uk-heading-large,
+.uk-section-secondary:not(.uk-preserve-color) .uk-heading-medium,
+.uk-section-secondary:not(.uk-preserve-color) .uk-heading-small,
+.uk-section-secondary:not(.uk-preserve-color) .uk-heading-xlarge,
+.uk-section-secondary:not(.uk-preserve-color) h1,
+.uk-section-secondary:not(.uk-preserve-color) h2,
+.uk-section-secondary:not(.uk-preserve-color) h3,
+.uk-section-secondary:not(.uk-preserve-color) h4,
+.uk-section-secondary:not(.uk-preserve-color) h5,
+.uk-section-secondary:not(.uk-preserve-color) h6,
+.uk-tile-primary:not(.uk-preserve-color) .uk-h1,
+.uk-tile-primary:not(.uk-preserve-color) .uk-h2,
+.uk-tile-primary:not(.uk-preserve-color) .uk-h3,
+.uk-tile-primary:not(.uk-preserve-color) .uk-h4,
+.uk-tile-primary:not(.uk-preserve-color) .uk-h5,
+.uk-tile-primary:not(.uk-preserve-color) .uk-h6,
+.uk-tile-primary:not(.uk-preserve-color) .uk-heading-2xlarge,
+.uk-tile-primary:not(.uk-preserve-color) .uk-heading-large,
+.uk-tile-primary:not(.uk-preserve-color) .uk-heading-medium,
+.uk-tile-primary:not(.uk-preserve-color) .uk-heading-small,
+.uk-tile-primary:not(.uk-preserve-color) .uk-heading-xlarge,
+.uk-tile-primary:not(.uk-preserve-color) h1,
+.uk-tile-primary:not(.uk-preserve-color) h2,
+.uk-tile-primary:not(.uk-preserve-color) h3,
+.uk-tile-primary:not(.uk-preserve-color) h4,
+.uk-tile-primary:not(.uk-preserve-color) h5,
+.uk-tile-primary:not(.uk-preserve-color) h6,
+.uk-tile-secondary:not(.uk-preserve-color) .uk-h1,
+.uk-tile-secondary:not(.uk-preserve-color) .uk-h2,
+.uk-tile-secondary:not(.uk-preserve-color) .uk-h3,
+.uk-tile-secondary:not(.uk-preserve-color) .uk-h4,
+.uk-tile-secondary:not(.uk-preserve-color) .uk-h5,
+.uk-tile-secondary:not(.uk-preserve-color) .uk-h6,
+.uk-tile-secondary:not(.uk-preserve-color) .uk-heading-2xlarge,
+.uk-tile-secondary:not(.uk-preserve-color) .uk-heading-large,
+.uk-tile-secondary:not(.uk-preserve-color) .uk-heading-medium,
+.uk-tile-secondary:not(.uk-preserve-color) .uk-heading-small,
+.uk-tile-secondary:not(.uk-preserve-color) .uk-heading-xlarge,
+.uk-tile-secondary:not(.uk-preserve-color) h1,
+.uk-tile-secondary:not(.uk-preserve-color) h2,
+.uk-tile-secondary:not(.uk-preserve-color) h3,
+.uk-tile-secondary:not(.uk-preserve-color) h4,
+.uk-tile-secondary:not(.uk-preserve-color) h5,
+.uk-tile-secondary:not(.uk-preserve-color) h6 {
+  color: #000 !important;
+}
+
+.uk-card-primary.uk-card-body,
+.uk-card-primary>:not([class*=uk-card-media]),
+.uk-card-secondary.uk-card-body,
+.uk-card-secondary>:not([class*=uk-card-media]),
+.uk-light,
+.uk-offcanvas-bar,
+.uk-overlay-primary,
+.uk-section-primary:not(.uk-preserve-color),
+.uk-section-secondary:not(.uk-preserve-color),
+.uk-tile-primary:not(.uk-preserve-color),
+.uk-tile-secondary:not(.uk-preserve-color) {
+  color: black !important;
+}
+
+footer {
+  display: flex;
+  position: relative;
+  padding-top: 5rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center !important;
+  width: 100%;
+}
+
+footer h2 {
+  color: #C1858D !important;
+  font-size: 20px;
+  font-weight: 600;
+  padding-bottom: 0, 5rem;
+}
+
+.name {
+  font-weight: bold;
+  text-align: center;
+}
+
+.price {
+  text-align: center;
+}
+
+.prod-description {
+  text-align: center;
+}
+
+.btn-outline-success {
+  --bs-btn-color: #DED7C7 !important;
+  --bs-btn-border-color: #DED7C7 !important;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #DED7C7 !important;
+  --bs-btn-hover-border-color: #DED7C7 !important;
+  --bs-btn-focus-shadow-rgb: 25, 135, 84;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #DED7C7 !important;
+  --bs-btn-active-border-color: #DED7C7 !important;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #DED7C7 !important;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #DED7C7 !important;
+  --bs-gradient: none;
+}
+
+.row {
+  padding-bottom: 5%;
+  padding-top: 5%;
+}
+
+.dropdown {
+  float: right;
+  padding-bottom: 5%;
+}
+
+.add-cart-btn {
+  font-size: 15px;
+  display: block;
+  height: 2.5rem;
+  position: relative;
+}
+
+.add-cart-btn {
+  background: #C1858D;
+  padding: 8px 8px;
+  color: var(--white);
+  font-weight: var(--fs-9);
+  font-weight: var(--weight-700);
+  text-transform: uppercase;
+  border-radius: var(--border-radius-md);
+  margin-bottom: 15px;
+  transition: var(--transition-timing);
+}
+
+.add-cart-btn:hover {
+  background: var(--eerie-black);
+  color: var(--white);
+}
+
+#daftar {
+  font-size: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  height: 2.5rem;
+  width: 500px;
+  position: relative;
+}
+
+#daftar {
+  background: #C1858D;
+  padding: 8px 8px;
+  color: white;
+  font-weight: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: var(--border-radius-md);
+  margin-bottom: 15px;
+  transition: var(--transition-timing);
+}
+
+#daftar:hover {
+  background: var(--eerie-black);
+  color: var(--white);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #C1858D !important;
+  --bs-btn-border-color: #C1858D !important;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #C1858D !important;
+  --bs-btn-hover-border-color: #C1858D !important;
+  --bs-btn-focus-shadow-rgb: 13, 110, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #C1858D !important;
+  --bs-btn-active-border-color: #C1858D !important;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #C1858D !important;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #C1858D !important;
+  --bs-gradient: none;
+}
+
+.btn {
+  --bs-btn-padding-x: 0.75rem;
+  --bs-btn-padding-y: 0.375rem;
+  --bs-btn-font-family: 'Montserrat', sans-serif !important;
+  --bs-btn-font-size: 15px !important;
+  --bs-btn-font-weight: 300 !important;
+  --bs-btn-line-height: 1.5;
+  --bs-btn-color: var(--bs-body-color);
+  --bs-btn-bg: transparent;
+  --bs-btn-border-width: var(--bs-border-width);
+  --bs-btn-border-color: transparent;
+  --bs-btn-border-radius: var(--bs-border-radius);
+  --bs-btn-hover-border-color: transparent;
+  --bs-btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
+  --bs-btn-disabled-opacity: 0.65;
+  --bs-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--bs-btn-focus-shadow-rgb), .5);
+}
+
+.box-element{
+	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+	background-color: #fff;
+	padding: 10px;
+}
+
+.thumbnail{
+	width: 100%;
+	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+    -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+    box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+}
+
+.col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
+	margin-top: 10px;
+}
+
+.form-field{
+    width:250px;
+	display: inline-block;
+	padding: 5px;
+}
+
+.cart-row{
+    display: flex;
+    align-items: flex-stretch;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ececec;
+}
+
+.row-image{
+    width: 100px;
+}
+
+.quantity{
+    display: inline-block;
+	font-weight: 700;
+	padding-right:10px;
+}
+
+.chg-quantity{
+	width: 12px;
+	cursor: pointer;
+	display: block;
+	margin-top: 5px;
+	transition:.1s;
+}
+
+.chg-quantity:hover{
+	opacity: .6;
+}
+
+
+.hidden{
+	display: none!important;
+}
