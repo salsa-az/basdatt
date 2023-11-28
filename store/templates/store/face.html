@@ -11,46 +11,22 @@
 <h3>Face</h3>
 
 <div class="row">
+    {% for product in products %}
     <div class="col-lg-4">
-        <img src="{% static 'images/face/FA1.png' %}" alt="" class="thumbnail">
+        <img src="{{ product.imageURL }}" alt="" class="thumbnail">
         <div class="box-element product">
             <a href="#" class="category">face</a>
-            <h6><strong>Product</strong></h6>
+            <h6><strong>{{product.name}}</strong></h6>
             <hr>
             <div class="price-box">
-                <p class="price" style="display: inline-block; float: right;">Rp 245.000,00</p>
+                <p class="price" style="display: inline-block; float: right;">Rp {{product.price|floatformat:0}}</p>
             </div>
             <button class="add-cart-btn">add to cart</button>
             {% comment %} <a class="btn btn-outline-success" href="#">View</a> {% endcomment %}
 
         </div>
     </div>
-    <div class="col-lg-4">
-        <img src="{% static 'images/face/FA1.png' %}" alt="" class="thumbnail">
-        <div class="box-element product">
-            <a href="#" class="category">face</a>
-            <h6><strong>Product</strong></h6>
-            <hr>
-            <div class="price-box">
-                <p class="price" style="display: inline-block; float: right;">Rp 245.000,00</p>
-            </div>
-            <button class="add-cart-btn">add to cart</button>
-            {% comment %} <a class="btn btn-outline-success" href="#">View</a> {% endcomment %}
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <img src="{% static 'images/face/FA1.png' %}" alt="" class="thumbnail">
-        <div class="box-element product">
-            <a href="#" class="category">face</a>
-            <h6><strong>Product</strong></h6>
-            <hr>
-            <div class="price-box">
-                <p class="price" style="display: inline-block; float: right;">Rp 245.000,00</p>
-            </div>
-            <button class="add-cart-btn">add to cart</button>
-            {% comment %} <a class="btn btn-outline-success" href="#">View</a> {% endcomment %}
-        </div>
-    </div>
+    {% endfor %}
 </div>
 
 {% endblock content %}
