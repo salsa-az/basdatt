@@ -21,7 +21,7 @@
             <div class="price-box">
                 <p class="price" style="display: inline-block; float: right;">Rp {{product.price|floatformat:0}}</p>
             </div>
-            <button class="add-cart-btn">add to cart</button>
+            <button data-product={{product.id}} data-action="add" class="add-cart-btn add-btn update-cart">add to cart</button>
             {% comment %} <a class="btn btn-outline-success" href="#">View</a> {% endcomment %}
 
         </div>

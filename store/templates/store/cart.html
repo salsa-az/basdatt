@@ -38,8 +38,8 @@
 					<div style="flex:1"><strong>${{item.product.price|floatformat:2}}</strong></div>
 					<div style="flex:1">
 						<p class="quantity">{{item.quantity}}
-							<img src="{% static 'images/up.png' %}" alt="" class="chg-quantity">
-							<img src="{% static 'images/down.png' %}" alt="" class="chg-quantity">
+							<img data-product="{{item.product.id}}" data-action="add" src="{% static 'images/up.png' %}" alt="" class="chg-quantity update-cart">
+							<img data-product="{{item.product.id}}" data-action="remove" src="{% static 'images/down.png' %}" alt="" class="chg-quantity update-cart">
 						</p>        
 					</div>
 					<div style="flex:1"><strong>${{item.get_total}}</strong></div>
