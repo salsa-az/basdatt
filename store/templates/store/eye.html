@@ -8,4 +8,25 @@
 
 <h3>Eye</h3>
 
+
+<div class="row">
+    {% for product in products %}
+    <div class="col-lg-4">
+        <img src="{{ product.imageURL }}" alt="" class="thumbnail">
+        <div class="box-element product">
+            <a href="#" class="category">face</a>
+            <h6><strong>{{product.name}}</strong></h6>
+            <hr>
+            <div class="price-box">
+                <p class="price" style="display: inline-block; float: right;">Rp {{product.price|floatformat:0}}</p>
+            </div>
+            <button data-product={{product.id}} data-action="add" class="add-cart-btn add-btn update-cart">add to cart</button>
+            {% comment %} <a class="btn btn-outline-success" href="#">View</a> {% endcomment %}
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
 {% endblock content %}
