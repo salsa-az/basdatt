@@ -116,7 +116,7 @@ def processOrder(request):
             order=order,
             address=data['shipping']['address'],
             city=data['shipping']['city'],
-            state=data['shipping']['state'],
+            province=data['shipping']['province'],
             zipcode=data['shipping']['zipcode'],
         )
 
