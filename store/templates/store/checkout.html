@@ -76,6 +76,7 @@
 </div>
 
 <script type="text/javascript">
+    {% comment %} let user = {{request.user}} {% endcomment %} //bikin payment options ga muncul. tapi kalo ga ada form nama dan email ga kebaca
     var shipping = '{{order.shipping}}'
     var total = '{{order.get_cart_total}}'
 
