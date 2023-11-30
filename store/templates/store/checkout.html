@@ -46,7 +46,7 @@
         <div class="box-element hidden" id="payment-info">
             <small>Payment Options</small>
             <div id="payment-button-container">
-                <button id="make-payment">Make payment</button>
+                <!--<button id="make-payment">Make payment</button>-->
             </div>
         </div>
     </div>
@@ -76,10 +76,42 @@
 
 </div>
 
+<script src="https://www.paypal.com/sdk/js?client-id=Aa7aE815YU1d0_JDhM1p0p4h2ze2uWjrLfRUBxhVYXnQ9XBxwnjAHYgFDJn2DLE3USiweyCrEYT_V&currency=USD&disable-funding=credit"></script>
+
+<script>
+        var total = '{{order.get_cart_total}}'
+    //Render the Paypal button into #paypal-button-container
+    paypal.Button({
+
+        style: {
+            color:'blue',
+            shape: 'react',
+        },
+
+        // Set up the transaction
+        createOrder: function(data, action){
+            return action.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: porseFLoat(total).toFixed(2)
+                    }
+                }]
+            })
+        }
+
+        onApprove: function(data, action){
+            return action.order.captuure(). then(function(details) {
+                submitFormData()
+            })
+        }
+    }).reminder('#paypale-button-container');
+</script>
+
+
 <script type="text/javascript">
     let user = '{{request.user}}'
     var shipping = '{{order.shipping}}'
-    var total = '{{order.get_cart_total}}'
+
 
     if(shipping == 'False'){
         document.getElementById('shipping-info').innerHTML = ''
@@ -105,9 +137,12 @@
         document.getElementById('payment-info').classList.remove('hidden')
         })
 
-    {% comment %} document.getElementById('make-payment').addEventListener('click', function(e){
+    /*
+    document.getElementById('make-payment').addEventListener('click', function(e){
         submitFormData()
-    }) {% endcomment %}
+    })
+    */
+
 
     function submitFormData(){
         console.log('Payment button clicked')
@@ -150,6 +185,10 @@
         .then((data) => {
             console.log('Success:', data);
             alert('Transaction completed');
+
+            cart = {}
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+
             window.location.href = "{% url 'store' %}"
         })
     }
