@@ -85,8 +85,10 @@
                 <div uk-navbar>
                     <div class="uk-navbar-left">
                         <form class="uk-navbar-nav" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
+                            {% comment %} <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button> {% endcomment %}
+                            <span style="color: white; font-weight: 550;">&nbsp;{{ user }}&nbsp;</span>
+                            <span><a href="{% url 'logout' %}" style="color: black;">&nbsp;Logout</a></span>
                         </form>
                     </div>
                     <div class="uk-navbar-center">
@@ -98,9 +100,9 @@
                             <li class="uk-logs">
                                 <a href="{% url 'cart' %}" ><ion-icon name="cart-outline"></ion-icon></a>
                             </li>
-                            <li class="uk-logs"><a href="/login">Log In</a></li>
+                            <li class="uk-logs"><a href="/register_login/">Log In</a></li>
                             <li><a href="#">Or</a></li>
-                            <li class="uk-logs"><a href="/register">Register</a></li>
+                            <li class="uk-logs"><a href="/register_login/">Register</a></li>
                         </ul>
         
                     </div>

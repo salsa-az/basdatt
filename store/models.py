@@ -10,7 +10,7 @@ class Customer(models.Model):
     email = models.EmailField(max_length=200, null=True)
     
     def __str__(self) -> str:
-        return self.name
+        return str(self.username) if self.username else "No Username"
     
 class Product(models.Model):
     category = models.CharField(

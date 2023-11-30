@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_protect
 import json
 import datetime
 
@@ -7,43 +8,77 @@ from .models import *
 from . utils import cookieCart, cartData, guestOrder
 
 # for userCreation
-from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .forms import CreateUserForm, LoginForm
 from django.contrib import messages
 
 # authenticate user
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here
-def registerUser(request):
-    form = CreateUserForm()
 
-    if request.method=="POST":
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            email = form.cleaned_data.get('email')
+@csrf_protect
+def register_or_login(request):
+    register_form = CreateUserForm()
+    login_form = LoginForm()  
+    
+    if request.method == "POST":
+        if "register" in request.POST:
+            register_form = CreateUserForm(request.POST)
+            if register_form.is_valid():
+                register_form.save()
+                user = register_form.cleaned_data.get('username')
+                email = register_form.cleaned_data.get('email')
+                # Additional actions for registration if needed
+                messages.success(request, 'Account was created for ' + user)
+                return redirect('store')  # Redirect to store after successful registration
+        
+        elif "login" in request.POST:
+            login_form = LoginForm(request.POST)
+            if request.method == "POST":
+                username = request.POST.get('username')
+                password = request.POST.get('password')
+                
+                user = authenticate(request, username=username, password=password)
+                if user:
+                    login(request, user)
+                    return redirect('store')  # Redirect to store after successful login
+                else:
+                    messages.info(request, 'Incorrect username or password')
 
-            Customer.objects.create(username=User.objects.get(username=user), email=email)
-            return redirect('login')
+    context = {'register_form': register_form, 'login_form': login_form}
+    return render(request, 'store/register_login.html', context)
 
-    context={'form':form}
-    return render(request, 'store/register.html',context)
+# def registerUser(request):
+#     form = CreateUserForm()
 
-def loginUser(request):
-    if request.method =="POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+#     if request.method=="POST":
+#         form = CreateUserForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             user = form.cleaned_data.get('username')
+#             messages.success(request, 'Account was created for ' + form.cleaned_data.get('username'))
+#             email = form.cleaned_data.get('email')
 
-        user = authenticate(request, username=username, password=password)
-        if user:
-            login(request, user)
-            return redirect('store')
-        else:
-            messages.info(request, 'Incorrect username or password')
-    context={}
-    return render(request, 'store/login.html',context)
+#             Customer.objects.create(username=User.objects.get(username=user), email=email)
+#             return redirect('register')
+
+#     context={'form':form}
+#     return render(request, 'store/register.html',context)
+
+# def loginUser(request):
+#     if request.method =="POST":
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+
+#         user = authenticate(request, username=username, password=password)
+#         if user:
+#             login(request, user)
+#             return redirect('store')
+#         else:
+#             messages.info(request, 'Incorrect username or password')
+#     context={}
+#     return render(request, 'store/login.html',context)
 
 def logoutUser(request):
     logout(request)
@@ -107,7 +142,7 @@ def face(request):
     order = data['order']
     items = data['items']
     
-    products = Product.objects.all()
+    products = Product.objects.filter(category='face')
     context = {'products':products, 'cartItems':cartItems}
     return render(request, 'store/face.html', context)
 
@@ -196,3 +231,10 @@ def processOrder(request):
         )
 
     return JsonResponse('Payment complete!', safe=False)
+
+# def product_detail(request, product_id):
+#     product = Product.objects.get(id=product_id)
+#     context = {
+#         'product': product,
+#     }
+#     return render(request, 'product_detail.html', context)

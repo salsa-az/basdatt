@@ -68,7 +68,7 @@
             {% endfor %}
 
             <h5>Items: {{order.get_cart_items}}</h5>
-            <h5>Total: {{order.get_cart_total|floatformat:2}}</h5>
+            <h5>Total: {{order.get_cart_total|floatformat:0}}</h5>
         </div>
     </div>
 
@@ -80,118 +80,118 @@
 
 <script>
         var total = '{{order.get_cart_total}}'
-    //Render the Paypal button into #paypal-button-container
-    paypal.Button({
+    //Render the Payment button into #payment-button-container
+    payment.Button({
 
         style: {
             color:'blue',
-            shape: 'react',
+            shape: 'rect',
         },
 
         // Set up the transaction
-        createOrder: function(data, action){
-            return action.order.create({
+        createOrder: function(data, actions){
+            return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: porseFLoat(total).toFixed(2)
+                        value: parseFLoat(total).toFixed(2)
                     }
                 }]
             })
         }
 
-        onApprove: function(data, action){
-            return action.order.captuure(). then(function(details) {
+        onApprove: function(data, actions){
+            return actions.order.captuure(). then(function(details) {
                 submitFormData()
             })
         }
-    }).reminder('#paypale-button-container');
+    }).reminder('#payment-button-container');
 </script>
 
 
 <script type="text/javascript">
     let user = '{{request.user}}'
     var shipping = '{{order.shipping}}'
-
-
-    if(shipping == 'False'){
+    if (shipping == 'False'){
         document.getElementById('shipping-info').innerHTML = ''
-    }
+   }
 
-    if (user != 'AnonymousUser'){
+   if (user != 'AnonymousUser'){
         document.getElementById('user-info').innerHTML = ''
     }
 
-    if (shipping == 'False' && user != 'AnonymousUser'){
-        //Hide entire form if user is logged in and shipping is false
-        document.getElementById('form-wrapper').classList.add("hidden");
-        //Show payment if logged im user wants to buy an item that does not require shipping
-        document.getElementById('payment-info').classList.remove("hidden");
-    }
+   if (shipping == 'False' && user != 'AnonymousUser'){
+       //Hide entire form if user is logged in and shipping is false
+           document.getElementById('form-wrapper').classList.add("hidden");
+           //Show payment if logged in user wants to buy an item that does not require shipping
+           document.getElementById('payment-info').classList.remove("hidden");
+   }
 
-    var form = document.getElementById('form')
+   var form = document.getElementById('form')
+   form.addEventListener('submit', function(e){
+       e.preventDefault()
+       console.log('Form Submitted...')
+       document.getElementById('form-button').classList.add("hidden");
+       document.getElementById('payment-info').classList.remove("hidden");
+   })
 
-    form.addEventListener('submit', function(e){
-        e.preventDefault()
-        console.log('Form submitted...')
-        document.getElementById('form-button').classList.add('hidden')
-        document.getElementById('payment-info').classList.remove('hidden')
-        })
+   /*
+   document.getElementById('make-payment').addEventListener('click', function(e){
+       submitFormData()
+   })
+   */
 
-    /*
-    document.getElementById('make-payment').addEventListener('click', function(e){
-        submitFormData()
-    })
-    */
+   function submitFormData(){
+       console.log('Payment button clicked')
 
+       var userFormData = {
+           'name':null,
+           'email':null,
+           'total':total,
+       }
 
-    function submitFormData(){
-        console.log('Payment button clicked')
+       var shippingInfo = {
+           'address':null,
+           'city':null,
+           'state':null,
+           'zipcode':null,
+       }
 
-        var userFormData = {
-            'name':null,
-            'email':null,
-            'total':total,
-        }
+       if (shipping != 'False'){
+           shippingInfo.address = form.address.value
+           shippingInfo.city = form.city.value
+           shippingInfo.state = form.state.value
+           shippingInfo.zipcode = form.zipcode.value
+       }
 
-        var shippingInfo = {
-            'address':null,
-            'city':null,
-            'province':null,
-            'zipcode':null,
-        }
+       if (user == 'AnonymousUser'){
+           userFormData.name = form.name.value
+           userFormData.email = form.email.value
+       }
 
-        if(shipping != 'False'){
-            shippingInfo.address = form.address.value
-            shippingInfo.city = form.city.value
-            shippingInfo.province = form.province.value
-            shippingInfo.zipcode = form.zipcode.value
-        }
+       console.log('Shipping Info:', shippingInfo)
+       console.log('User Info:', userFormData)
 
-        if(user == 'AnonymousUser'){
-            userFormData.name = form.name.value
-            userFormData.email = form.email.value
-        }
+       var url = "/process_order/"
+       fetch(url, {
+           method:'POST',
+           headers:{
+               'Content-Type':'applicaiton/json',
+               'X-CSRFToken':csrftoken,
+           }, 
+           body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
+           
+       })
+       .then((response) => response.json())
+       .then((data) => {
+           console.log('Success:', data);
+           alert('Transaction completed');  
 
-        var url = '/process_order/'
-        fetch(url,{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json',
-                'X-CSRFToken':csrftoken,
-            },
-            body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo})
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('Success:', data);
-            alert('Transaction completed');
+           cart = {}
+           document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 
-            cart = {}
-            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+           window.location.href = "{% url 'store' %}"
 
-            window.location.href = "{% url 'store' %}"
-        })
-    }
+           })
+   }
 </script>
-
 {% endblock content %}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Sign Up | Log In</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;600&family=Seaweed+Script&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static "css/login.css" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="title-text">
+          <div class="title login">Welcome to Viola</div>
+          <div class="title signup">Register Account</div>
+        </div>
+        <div class="form-container">
+          <div class="slide-controls">
+            <input type="radio" name="slide" id="login" checked>
+            <input type="radio" name="slide" id="signup">
+            <label for="login" class="slide login">Login</label>
+            <label for="signup" class="slide signup">Signup</label>
+            <div class="slider-tab"></div>
+          </div>
+          <div class="form-inner">
+            <form action="#" method="POST" class="login" id="login-form">
+              {% csrf_token %}
+              <div class="field">
+                {% comment %} <input type="text" placeholder="Username" required> {% endcomment %}
+                {{ login_form.username }}
+              </div>
+              <div class="field">
+                {% comment %} <input type="password" placeholder="Password" required> {% endcomment %}
+                {{ login_form.password }}
+              </div>
+      
+              <div class="field btn">
+                <div class="btn-layer"></div>
+                <input type="submit" value="Log In" name="login">
+              </div>
+              <div class="signup-link">Not a member? <a href="">Signup now</a></div>
+            </form>
+            <form action="#" method="POST" class="signup" id="signup-form">
+              {% csrf_token %}
+              <div class="field">
+                {{ register_form.username }}
+              </div>
+               <div class="field">
+                {{ register_form.email }}
+                {% comment %} <input type="email" placeholder="Email Address" required> {% endcomment %}
+              </div>
+              <div class="field">
+                {{ register_form.password1 }}
+                {% comment %} <input type="password" placeholder="Password" required> {% endcomment %}
+              </div>
+              <div class="field">
+                {{ register_form.password2 }}
+                {% comment %} <input type="password" placeholder="Confirm password" required> {% endcomment %}
+              </div>
+              <div class="field btn">
+                <div class="btn-layer"></div>
+                <input type="submit" value="Sign Up" name="register">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  
+    <script>
+        // Get form fields
+        let loginFormFields = document.getElementById("login-form").getElementsByTagName("input");
+        let signupFormFields = document.getElementById("signup-form").getElementsByTagName("input");
+        
+        // Set placeholders
+        loginFormFields[1].placeholder = "Username";
+        loginFormFields[2].placeholder = "Password";
+
+        signupFormFields[1].placeholder = "Username";
+        signupFormFields[2].placeholder = "Email Address";
+        signupFormFields[3].placeholder = "Password";
+        signupFormFields[4].placeholder = "Confirm Password";
+    </script>
+  
+    <script>
+        // Your existing JavaScript code
+        const loginText = document.querySelector(".title-text .login");
+        const loginForm = document.querySelector("form.login");
+        const loginBtn = document.querySelector("label.login");
+        const signupBtn = document.querySelector("label.signup");
+        const signupLink = document.querySelector("form .signup-link a");
+        signupBtn.onclick = (()=>{
+          loginForm.style.marginLeft = "-50%";
+          loginText.style.marginLeft = "-50%";
+        });
+        loginBtn.onclick = (()=>{
+            loginForm.style.marginLeft = "0%";
+            loginText.style.marginLeft = "0%";
+        });
+        signupLink.onclick = (()=>{
+          signupBtn.click();
+          return false;
+        });
+    </script>
+</body>
+</html>

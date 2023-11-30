@@ -7,6 +7,9 @@
 {% endblock %}
  
  <section>
+    {% for message in messages %}
+        <p id="messages">{{ message }}</p>
+      {% endfor %}
      <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1" uk-slider="center: true">
 
          <ul class="uk-slider-items uk-grid uk-grid-match" uk-height-viewport="offset-top: true; offset-bottom: 30">
