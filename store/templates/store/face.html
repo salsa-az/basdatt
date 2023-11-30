@@ -1,5 +1,6 @@
 {% extends "store/main.html" %}
 {% load static %}
+{% load l10n %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/showcase.css' %}">
 
@@ -7,8 +8,6 @@
     {% include "store/category.html" %}
 {% endblock %}
 
-
-<h3>Face</h3>
 
 <div class="row">
     {% for product in products %}

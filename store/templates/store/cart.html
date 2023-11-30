@@ -1,5 +1,6 @@
 {% extends "store/main.html" %}
 {% load static %}
+{% load l10n %}
 {% block content %}
 
 <h3>Cart</h3>
@@ -35,7 +36,7 @@
 				<div class="cart-row">
 					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
 					<div style="flex:2"><strong>{{item.product.name}}</strong></div>
-					<div style="flex:1"><strong>Rp {{item.product.price|floatformat:2}}</strong></div>
+					<div style="flex:1"><strong>Rp {{item.product.price|localize}}</strong></div>
 					<div style="flex:1">
 						<p class="quantity">{{item.quantity}}
 							<img data-product="{{item.product.id}}" data-action="add" src="{% static 'images/up.png' %}" alt="" class="chg-quantity update-cart">

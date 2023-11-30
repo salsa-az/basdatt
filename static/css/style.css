@@ -56,7 +56,7 @@ iframe {
   position: relative;
   text-transform: uppercase;
   padding: 2rem 0 2rem 0;
-  margin-bottom: 5rem;
+  margin-bottom: 0rem;
   display: flex;
   justify-content: space-around;
 }

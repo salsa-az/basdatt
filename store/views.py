@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
 import datetime
@@ -6,16 +6,54 @@ import datetime
 from .models import *
 from . utils import cookieCart, cartData, guestOrder
 
-# Create your views here.
+# for userCreation
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CreateUserForm
+from django.contrib import messages
+
+# authenticate user
+from django.contrib.auth import authenticate, login, logout
+
+# Create your views here
+def registerUser(request):
+    form = CreateUserForm()
+
+    if request.method=="POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+
+            Customer.objects.create(username=User.objects.get(username=user), email=email)
+            return redirect('login')
+
+    context={'form':form}
+    return render(request, 'store/register.html',context)
+
+def loginUser(request):
+    if request.method =="POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+        if user:
+            login(request, user)
+            return redirect('store')
+        else:
+            messages.info(request, 'Incorrect username or password')
+    context={}
+    return render(request, 'store/login.html',context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('store') 
+
 
 def store(request):
-    data = cookieCart(request)
-    cartItems = data['cartItems']
-    order = data['order']
-    items = data['items']
-        
-    context = {'items':items, 'order':order, 'cartItems':cartItems}
-    return render(request, 'store/checkout.html', context)
+    
+    context = {}
+    return render(request, 'store/store.html', context)
 
 def cart(request):
     data = cookieCart(request)
@@ -24,7 +62,7 @@ def cart(request):
     items = data['items']
         
     context = {'items':items, 'order':order, 'cartItems':cartItems}
-    return render(request, 'store/checkout.html', context)
+    return render(request, 'store/cart.html', context)
 
 def checkout(request):
     data = cookieCart(request)
@@ -63,19 +101,16 @@ def updateItem(request):
     return JsonResponse('Item was added', safe=False)
 
 def face(request):
+    data = cartData(request)
     
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
-
-    products = Product.objects.filter(category='face')
-    context = {'products': products}
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+    
+    products = Product.objects.all()
+    context = {'products':products, 'cartItems':cartItems}
     return render(request, 'store/face.html', context)
+
 
 def lip(request):
     products = Product.objects.filter(category='lip')
@@ -120,7 +155,7 @@ def processOrder(request):
         # name = data['form']['name']
         # email = data['form']['email']
 
-        # cookieData = cookieCaty(request)
+        # cookieData = cookieCart(request)
         # items = cookiedata['items']
 
         # customer, created = Customer.objects.get_or_create(
@@ -144,11 +179,11 @@ def processOrder(request):
         #         )
 
     total = float(data['form']['total'])
-        order.transaction_id = transaction_id
-
-        if total == float(order.get_cart_total):
-            order.complete = True
-        order.save()
+    order.transaction_id = transaction_id
+    
+    if total == float(order.get_cart_total):
+        order.complete = True
+    order.save()
     
     if order.shipping == True:
         ShippingAddress.objects.create(
@@ -160,4 +195,4 @@ def processOrder(request):
             zipcode=data['shipping']['zipcode'],
         )
 
-    return JsonResponse('Payment complete!, safe=False')
+    return JsonResponse('Payment complete!', safe=False)
