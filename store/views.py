@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 import json
 import datetime
 
@@ -15,13 +15,18 @@ from django.contrib import messages
 # authenticate user
 from django.contrib.auth import authenticate, login, logout
 
+# user session
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
+from django.views.decorators.http import require_POST
+
 # Create your views here
 
 @csrf_protect
 def register_or_login(request):
     register_form = CreateUserForm()
     login_form = LoginForm()  
-    
+
     if request.method == "POST":
         if "register" in request.POST:
             register_form = CreateUserForm(request.POST)
@@ -29,16 +34,15 @@ def register_or_login(request):
                 register_form.save()
                 user = register_form.cleaned_data.get('username')
                 email = register_form.cleaned_data.get('email')
-                # Additional actions for registration if needed
                 messages.success(request, 'Account was created for ' + user)
-                return redirect('store')  # Redirect to store after successful registration
-        
+                return render(request, 'store/register_login.html', {'just_registered': True})
+
         elif "login" in request.POST:
             login_form = LoginForm(request.POST)
             if request.method == "POST":
                 username = request.POST.get('username')
                 password = request.POST.get('password')
-                
+
                 user = authenticate(request, username=username, password=password)
                 if user:
                     login(request, user)
@@ -48,37 +52,6 @@ def register_or_login(request):
 
     context = {'register_form': register_form, 'login_form': login_form}
     return render(request, 'store/register_login.html', context)
-
-# def registerUser(request):
-#     form = CreateUserForm()
-
-#     if request.method=="POST":
-#         form = CreateUserForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             user = form.cleaned_data.get('username')
-#             messages.success(request, 'Account was created for ' + form.cleaned_data.get('username'))
-#             email = form.cleaned_data.get('email')
-
-#             Customer.objects.create(username=User.objects.get(username=user), email=email)
-#             return redirect('register')
-
-#     context={'form':form}
-#     return render(request, 'store/register.html',context)
-
-# def loginUser(request):
-#     if request.method =="POST":
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-
-#         user = authenticate(request, username=username, password=password)
-#         if user:
-#             login(request, user)
-#             return redirect('store')
-#         else:
-#             messages.info(request, 'Incorrect username or password')
-#     context={}
-#     return render(request, 'store/login.html',context)
 
 def logoutUser(request):
     logout(request)
@@ -104,7 +77,12 @@ def checkout(request):
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
-        
+
+    # After processing the checkout, clear the cart
+    if request.method == 'POST':
+        # Clear the cart
+        request.session['cart'] = {}
+
     context = {'items':items, 'order':order, 'cartItems':cartItems}
     return render(request, 'store/checkout.html', context)
 
@@ -135,15 +113,9 @@ def updateItem(request):
 
     return JsonResponse('Item was added', safe=False)
 
-def face(request):
-    data = cartData(request)
-    
-    cartItems = data['cartItems']
-    order = data['order']
-    items = data['items']
-    
+def face(request):    
     products = Product.objects.filter(category='face')
-    context = {'products':products, 'cartItems':cartItems}
+    context = {'products':products}
     return render(request, 'store/face.html', context)
 
 
@@ -157,6 +129,7 @@ def eye(request):
     context = {'products': products}
     return render(request, 'store/eye.html', context)
 
+@require_POST
 def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
@@ -164,77 +137,91 @@ def processOrder(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order , created = Order.objects.get_or_create(customer=customer, complete=False)
-        
-    # total = float(data['from']['total'])
-    # order.transaction_id = transaction_id
-
-    # if total == order.get_cart_total:
-    #     order.complete = True
-    # order.save()
-
-    # if order.shipping == True:
-    #     ShippingAddress.objects.create(
-    #         customer=customer,
-    #         order=order,
-    #         address=data['shipping']['address'],
-    #         city=data['shipping']['city'],
-    #         province=data['shipping']['province'],
-    #         zipcode=data['shipping']['zipcode'],
-    #     )
-
     else:
         customer, order = guestOrder(request, data)
-        # print('User is not logged in')
-
-        # print('COOKIES:', request.COOKIES)
-        # name = data['form']['name']
-        # email = data['form']['email']
-
-        # cookieData = cookieCart(request)
-        # items = cookiedata['items']
-
-        # customer, created = Customer.objects.get_or_create(
-        #     email=email,
-        # )
-        # customer.name = name
-        # customer.save()
-
-        # order = Order.objects.create(
-        #     customer=customer,
-        #     complete=False,
-        #     )
-        
-        # for item in items:
-        #     product = Product.objects.get(id=item['product']['id'])
-
-        #     orderItem = OrderItem.objects.create(
-        #         product=products,
-        #         order=order,
-        #         quantity=item['quantity']
-        #         )
 
     total = float(data['form']['total'])
     order.transaction_id = transaction_id
     
     if total == float(order.get_cart_total):
         order.complete = True
-    order.save()
-    
-    if order.shipping == True:
-        ShippingAddress.objects.create(
-            customer=customer,
-            order=order,
-            address=data['shipping']['address'],
-            city=data['shipping']['city'],
-            province=data['shipping']['province'],
-            zipcode=data['shipping']['zipcode'],
-        )
+        order.save()
 
-    return JsonResponse('Payment complete!', safe=False)
+        if order.shipping == True:
+            ShippingAddress.objects.create(
+                customer=customer,
+                order=order,
+                address=data['shipping']['address'],
+                city=data['shipping']['city'],
+                province=data['shipping']['province'],
+                zipcode=data['shipping']['zipcode'],
+            )
 
+        # Empty the cart
+        cart = cart.objects.get(customer=customer)
+        cart.items.clear()
+
+        messages.success(request, 'Transaction complete!')
+        return redirect('store')
+
+    messages.error(request, 'There was a problem with your transaction.')
+    return redirect('checkout')
 # def product_detail(request, product_id):
 #     product = Product.objects.get(id=product_id)
 #     context = {
 #         'product': product,
 #     }
 #     return render(request, 'product_detail.html', context)
+
+@require_POST
+def add_to_cart(request, id):
+    if request.user.is_authenticated:
+        product = get_object_or_404(Product, id=id)
+
+        if 'productId' not in request.session:
+            # Update the cart
+            request.session['productId'] = id
+            request.session['productTitle'] = product.title
+
+            messages.success(request, 'Successfully added to the cart')
+        else:
+            messages.error(request, 'Only 1 quantity can be added to the cart')
+
+        return redirect(f'/product/{id}')
+    else:
+        messages.error(request, 'Please log in to add products to your cart.')
+        return redirect('/login')
+    
+@require_POST
+def remove_from_cart(request, userId, id):
+    if request.user.is_authenticated and str(request.user.id) == userId:
+        product = get_object_or_404(Product, id=id)
+        if product.id in request.session:
+            # Remove the product from the cart
+            del request.session[product.id]
+            del request.session[product.title]
+
+            # Assuming user.cart is a list of product ids
+            request.user.cart.remove(product.id)
+            request.user.save()
+
+            return redirect(f'/user/{userId}/cart')
+        else:
+            messages.error(request, 'Product not in cart')
+            return redirect(f'/user/{userId}/cart')
+    else:
+        messages.error(request, 'Please log in to remove products from your cart.')
+        return redirect('/login')
+    
+# @require_POST
+# def empty_cart(request):
+#     if request.method == 'POST':
+#         # Empty the cart
+#         if request.user.is_authenticated:
+#             cart = Order.objects.get(customer=request.user.customer, complete=False)
+#             cart.items.clear()
+#         else:
+#             request.session['cart'] = {}
+#         return JsonResponse({'success': True})
+#     else:
+#         return JsonResponse({'success': False})

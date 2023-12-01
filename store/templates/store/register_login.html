@@ -26,7 +26,7 @@
             <div class="slider-tab"></div>
           </div>
           <div class="form-inner">
-            <form action="#" method="POST" class="login" id="login-form">
+            <form action="" method="POST" class="login" id="login-form">
               {% csrf_token %}
               <div class="field">
                 {% comment %} <input type="text" placeholder="Username" required> {% endcomment %}
@@ -36,7 +36,7 @@
                 {% comment %} <input type="password" placeholder="Password" required> {% endcomment %}
                 {{ login_form.password }}
               </div>
-      
+
               <div class="field btn">
                 <div class="btn-layer"></div>
                 <input type="submit" value="Log In" name="login">
@@ -68,12 +68,12 @@
           </div>
         </div>
       </div>
-  
+
     <script>
         // Get form fields
         let loginFormFields = document.getElementById("login-form").getElementsByTagName("input");
         let signupFormFields = document.getElementById("signup-form").getElementsByTagName("input");
-        
+
         // Set placeholders
         loginFormFields[1].placeholder = "Username";
         loginFormFields[2].placeholder = "Password";
@@ -83,7 +83,7 @@
         signupFormFields[3].placeholder = "Password";
         signupFormFields[4].placeholder = "Confirm Password";
     </script>
-  
+
     <script>
         // Your existing JavaScript code
         const loginText = document.querySelector(".title-text .login");
@@ -103,6 +103,12 @@
           signupBtn.click();
           return false;
         });
+
+        {% if just_registered %}
+        window.onload = (()=>{
+          loginBtn.click();
+        });
+        {% endif %}
     </script>
 </body>
 </html>
