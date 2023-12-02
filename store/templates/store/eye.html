@@ -12,7 +12,9 @@
         <img src="{{ product.imageURL }}" alt="" class="thumbnail">
         <div class="box-element product">
             <a href="#" class="category">eye</a>
-            <h6><strong>{{product.name}}</strong></h6>
+            <a href={{ product.id }}>
+                <h6><strong>{{product.name}}</strong></h6>
+            </a>
             <hr>
             <div class="price-box">
                 <p class="price" style="display: inline-block; float: right;">Rp {{product.price|floatformat:0}}</p>

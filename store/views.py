@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 import json
 import datetime
@@ -19,6 +19,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.views.decorators.http import require_POST
+
+from django.template import engines
+print(list(engines['django'].engine.template_loaders[0].get_template_sources('face.html')))
+
 
 # Create your views here
 
@@ -129,6 +133,16 @@ def eye(request):
     context = {'products': products}
     return render(request, 'store/eye.html', context)
 
+def product_detail(request, category, productid):
+    try:
+        product = Product.objects.filter(category=category).get(id=productid)
+    except Product.DoesNotExist:
+        raise Http404("Product does not exist")
+    context = {
+        'product': product,
+    }
+    return render(request, 'store/product_detail.html', context)
+
 @require_POST
 def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
@@ -166,12 +180,6 @@ def processOrder(request):
 
     messages.error(request, 'There was a problem with your transaction.')
     return redirect('checkout')
-# def product_detail(request, product_id):
-#     product = Product.objects.get(id=product_id)
-#     context = {
-#         'product': product,
-#     }
-#     return render(request, 'product_detail.html', context)
 
 @require_POST
 def add_to_cart(request, id):
@@ -212,6 +220,7 @@ def remove_from_cart(request, userId, id):
     else:
         messages.error(request, 'Please log in to remove products from your cart.')
         return redirect('/login')
+
     
 # @require_POST
 # def empty_cart(request):

@@ -14,6 +14,7 @@ urlpatterns = [
     # path('empty_cart/', views.empty_cart, name='empty_cart'),
     
     path('face/', views.face, name="face"),
+    path('<str:category>/<int:productid>/', views.product_detail, name='product_detail'),
     path('lip/', views.lip, name="lip"),
     path('eye/', views.eye, name="eye"),
 ]

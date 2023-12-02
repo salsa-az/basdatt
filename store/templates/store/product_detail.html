@@ -1,0 +1,53 @@
+{% extends "store/main.html" %}
+{% load static %}
+{% load l10n %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/product.css' %}">
+
+{% block category %}
+    {% include "store/category.html" %}
+{% endblock %}
+
+<div class="product-featured">
+
+    <div class="showcase-wrapper has-scrollbar">
+
+      <div class="showcase-container">
+
+        <div class="showcase">
+
+          <div class="showcase-banner">
+            <img src="{{ product.imageURL }}" alt="Forever Couture Skin Glow Cushion Foundation Refill" class="showcase-img">
+          </div>
+
+          <div class="showcase-content">
+
+            <a href="#" style="text-decoration: none;">
+              <h3 class="showcase-title">{{product.name}}</h3>
+            </a>
+
+            <p class="showcase-desc">
+                {{product.description}}
+            </p>
+
+            <div class="price-box">
+              <p class="price">Rp {{product.price|floatformat:0}}</p>
+            </div>
+
+            <button data-product={{product.id}} data-action="add" class="add-cart-btn add-btn update-cart">add to cart</button>
+
+            <div class="showcase-status">
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+{% endblock content %}
